@@ -56,6 +56,13 @@ app.get("/api", function(req, res) {
   
   res.json({ unix: todayUnixTimestamp, utc: todayUTCString });
 });
+app.get("/api/whoami", function(req, res) {
+  const ipaddress = req.ip;
+  const language = req.headers["accept-language"];
+  const software = req.headers["user-agent"];
+  
+  res.json({ ipaddress, language, software });
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
