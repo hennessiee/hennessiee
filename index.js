@@ -25,10 +25,22 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:date",function(req,res){
-  const dateStr = req.params.date;
-  const dateObj = new Date(dateStr);
-  const unixTimestamp = Date.parse(dateObj) / 1000;
-  res.json({ unix: unixTimestamp * 1000 });
+  let input = req.params.date;
+  
+  // Check if input is a Unix timestamp (i.e., all digits)
+  if (/^\d+$/.test(input)) {
+    input = parseInt(input);
+  }
+  
+  const dateObj = new Date(input);
+  const unixTimestamp = Date.parse(dateObj);
+  
+  if (isNaN(unixTimestamp)) {
+    res.json({ error: "Invalid Date" });
+  } else {
+    const utcDateString = dateObj.toUTCString();
+    res.json({ unix: unixTimestamp, utc: utcDateString });
+  }
 });
 
 // listen for requests :)
