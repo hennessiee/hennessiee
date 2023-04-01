@@ -24,30 +24,30 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/:date",function(req,res){
-  let input = req.params.date;
-  if(input.length=0){
-    let unixTimestamp=Date.now()
+// app.get("/api/:date",function(req,res){
+//   let input = req.params.date;
+//   if(input.length=0){
+//     let unixTimestamp=Date.now()
 
-    const todayDateObj = new Date();
-    todayDateObj.toUTCString();
-    res.json({unix:unixTimestamp,utc:todayDateObj})
-  }
-  // Check if input is a Unix timestamp (i.e., all digits)
-  if (/^\d+$/.test(input)) {
-    input = parseInt(input);
-  }
+//     const todayDateObj = new Date();
+//     todayDateObj.toUTCString();
+//     res.json({unix:unixTimestamp,utc:todayDateObj})
+//   }
+//   // Check if input is a Unix timestamp (i.e., all digits)
+//   if (/^\d+$/.test(input)) {
+//     input = parseInt(input);
+//   }
   
-  const dateObj = new Date(input);
-  const unixTimestamp = Date.parse(dateObj);
+//   const dateObj = new Date(input);
+//   const unixTimestamp = Date.parse(dateObj);
   
-  if (isNaN(unixTimestamp)) {
-    res.json({ error: "Invalid Date" });
-  } else {
-    const utcDateString = dateObj.toUTCString();
-    res.json({ unix: unixTimestamp, utc: utcDateString });
-  }
-});
+//   if (isNaN(unixTimestamp)) {
+//     res.json({ error: "Invalid Date" });
+//   } else {
+//     const utcDateString = dateObj.toUTCString();
+//     res.json({ unix: unixTimestamp, utc: utcDateString });
+//   }
+// });
 // // Add new route for empty date parameter
 // app.get("/api", function(req, res) {
 //   const todayUnixTimestamp = Date.now();
