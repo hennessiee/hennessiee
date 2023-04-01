@@ -27,21 +27,24 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:date",function(req,res){
   let input = req.params.date;
   
-  // Check if input is a Unix timestamp (i.e., all digits)
-  if (/^\d+$/.test(input)) {
-    input = parseInt(input);
-  }
-  
-  const dateObj = new Date(input);
-  const unixTimestamp = Date.parse(dateObj);
-  
-  if (isNaN(unixTimestamp)) {
-    res.json({ error: "Invalid Date" });
-  } else {
-    const utcDateString = dateObj.toUTCString();
-    res.json({ unix: unixTimestamp, utc: utcDateString });
-  }
-});
+  app.get("/api/:date",function(req,res){
+    let input = req.params.date;
+    
+    // Check if input is a Unix timestamp (i.e., all digits)
+    if (/^\d+$/.test(input)) {
+      input = parseInt(input);
+    }
+    
+    const dateObj = input ? new Date(input) : new Date();
+    const unixTimestamp = Date.parse(dateObj);
+    
+    if (isNaN(unixTimestamp)) {
+      res.json({ error: "Invalid Date" });
+    } else {
+      const utcDateString = dateObj.toUTCString();
+      res.json({ unix: unixTimestamp, utc: utcDateString });
+    }
+  });
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
