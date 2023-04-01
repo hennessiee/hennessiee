@@ -48,6 +48,14 @@ app.get("/api/:date",function(req,res){
     res.json({ unix: unixTimestamp, utc: utcDateString });
   }
 });
+// Add new route for empty date parameter
+app.get("/api", function(req, res) {
+  const todayUnixTimestamp = Date.now();
+  const todayDateObj = new Date();
+  const todayUTCString = todayDateObj.toUTCString();
+  
+  res.json({ unix: todayUnixTimestamp, utc: todayUTCString });
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
