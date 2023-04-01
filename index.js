@@ -48,14 +48,14 @@ app.get("/api/:date",function(req,res){
     res.json({ unix: unixTimestamp, utc: utcDateString });
   }
 });
-// Add new route for empty date parameter
-app.get("/api", function(req, res) {
-  const todayUnixTimestamp = Date.now();
-  const todayDateObj = new Date();
-  const todayUTCString = todayDateObj.toUTCString();
+// // Add new route for empty date parameter
+// app.get("/api", function(req, res) {
+//   const todayUnixTimestamp = Date.now();
+//   const todayDateObj = new Date();
+//   const todayUTCString = todayDateObj.toUTCString();
   
-  res.json({ unix: todayUnixTimestamp, utc: todayUTCString });
-});
+//   res.json({ unix: todayUnixTimestamp, utc: todayUTCString });
+// });
 app.get("/api/whoami", function(req, res) {
   const ipaddress = req.ip;
   const language = req.headers["accept-language"];
